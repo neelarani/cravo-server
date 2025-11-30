@@ -31,7 +31,7 @@ export const getAllMenu = catchAsync(async (req, res) => {
 export const getSingleMenu = catchAsync(async (req, res) => {
   const { id } = req.params;
 
-  const menu = await service.getSingleMenu(id);
+  const menu = await service.getSingleMenu(id!);
 
   sendResponse(res, {
     success: true,
@@ -45,7 +45,7 @@ export const getSingleMenu = catchAsync(async (req, res) => {
 export const updateMenu = catchAsync(async (req, res) => {
   const { id } = req.params;
 
-  const updatedMenu = await service.updateMenu(id, req.body, req.file);
+  const updatedMenu = await service.updateMenu(id!, req.body, req.file);
 
   sendResponse(res, {
     success: true,
@@ -59,7 +59,7 @@ export const updateMenu = catchAsync(async (req, res) => {
 export const deleteMenu = catchAsync(async (req, res) => {
   const { id } = req.params;
 
-  const deletedMenu = await service.deleteMenu(id);
+  const deletedMenu = await service.deleteMenu(id!);
 
   sendResponse(res, {
     success: true,

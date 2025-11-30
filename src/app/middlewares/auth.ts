@@ -14,7 +14,7 @@ export const auth = (...roles: string[]) => {
       if (!token) {
         throw new Error('You are not authorized!');
       }
-      const verifyUser = verifyToken(token, config.jwt_access_token!);
+      const verifyUser = verifyToken(token, config.jwt_secret);
       req.user = verifyUser;
 
       if (roles.length && !roles.includes(verifyUser.role)) {

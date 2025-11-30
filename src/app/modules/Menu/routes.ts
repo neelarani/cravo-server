@@ -17,4 +17,21 @@ router.post(
   controller.createMenu
 );
 
+router.get('/', controller.getAllMenu);
+
+router.get('/:id', controller.getSingleMenu);
+
+router.patch(
+  '/:id',
+  fileUploader.upload.single('file'),
+  validateRequest(validation.foodItemUpdateSchema),
+  controller.updateMenu
+);
+
+router.delete(
+  '/:id',
+  auth(Role.ADMIN, Role.SUPPER_ADMIN),
+  controller.deleteMenu
+);
+
 export default router;
