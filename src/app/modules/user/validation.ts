@@ -1,5 +1,5 @@
 // src/schemas/user.schema.ts
-import { z } from 'zod';
+import { string, z } from 'zod';
 
 export const createUserSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -13,6 +13,7 @@ export const createUserSchema = z.object({
     .regex(/[@$!%*?&]/, 'Password must contain at least one special character'),
   full_name: z.string().min(1, 'Full name is required'),
   avatar_url: z.string().url().nullable().optional(),
+  phone: z.string(),
 });
 
 // For updates: all fields optional
@@ -29,4 +30,5 @@ export const updateUserSchema = z.object({
     .regex(/\d/, 'Password must contain at least one number')
     .regex(/[@$!%*?&]/, 'Password must contain at least one special character')
     .optional(),
+  phone: z.string().optional(),
 });

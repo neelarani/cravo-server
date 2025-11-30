@@ -13,14 +13,19 @@ const env = cleanEnv(process.env, {
   RESET_PASS_SECRET: str(),
   EMAIL: str(),
   APP_PASS: str(),
+  JWT_ACCESS_TOKEN: str(),
   JWT_RESET_PASS_TOKEN_EXPIRES_IN: str(),
   RESET_PASS_LINK: str(),
+  CLOUDINARY_CLOUD_NAME: str(),
+  CLOUDINARY_API_KEY: str(),
+  CLOUDINARY_API_SECRET: str(),
 });
 
 export default {
   node_env: env.NODE_ENV,
   port: env.PORT,
   database_url: env.DATABASE_URL,
+  jwt_access_token: env.JWT_ACCESS_TOKEN,
   jwt_secret: env.JWT_SECRET,
   refresh_token: env.REFRESH_TOKEN,
   reset_pass_secret: env.RESET_PASS_SECRET,
@@ -28,4 +33,7 @@ export default {
   app_pass: env.APP_PASS,
   reset_pass_token_expires_in: env.JWT_RESET_PASS_TOKEN_EXPIRES_IN,
   reset_pass_link: env.RESET_PASS_LINK,
+  cloudinary_cloud_name: env.CLOUDINARY_CLOUD_NAME,
+  cloudinary_api_key: env.CLOUDINARY_API_KEY,
+  cloudinary_api_secret: env.CLOUDINARY_API_SECRET,
 };

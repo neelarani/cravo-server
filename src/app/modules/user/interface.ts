@@ -10,6 +10,7 @@ export interface IUser {
   avatar_url?: string | null;
   password: string;
   role: Role;
+  phone: string;
   created_at: Date;
   updated_at: Date;
 }

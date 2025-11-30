@@ -6,7 +6,7 @@ import * as controller from './controller';
 const router = Router();
 
 router.post(
-  '/create-user',
+  '/register',
   validateRequest(validation.createUserSchema),
   controller.createUser
 );

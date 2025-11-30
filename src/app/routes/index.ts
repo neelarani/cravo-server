@@ -10,6 +10,10 @@ const moduleRoutes: Array<{ path: string; route: Router }> = [
     path: '/auth',
     route: modules.authRoutes,
   },
+  {
+    path: '/menu',
+    route: modules.authMenu,
+  },
 ];
 
 export default moduleRoutes.reduce(
