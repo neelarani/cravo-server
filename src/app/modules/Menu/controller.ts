@@ -69,3 +69,15 @@ export const deleteMenu = catchAsync(async (req, res) => {
     data: deletedMenu,
   });
 });
+
+export const getCategoriesController = catchAsync(async (req, res) => {
+  const categories = await service.getCategories();
+  console.log(categories);
+
+  sendResponse(res, {
+    success: true,
+    status: HTTP_CODE.OK,
+    message: 'Categories fetched successfully',
+    data: ['All Items', ...categories],
+  });
+});

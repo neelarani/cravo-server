@@ -34,4 +34,6 @@ router.delete(
   controller.deleteMenu
 );
 
+router.get('/categories', controller.getCategoriesController);
+
 export default router;

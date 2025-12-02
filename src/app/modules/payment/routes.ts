@@ -5,7 +5,11 @@ import { Role } from '../user/interface';
 
 const router = Router();
 
-router.post('/create', auth(Role.USER), controller.createOrderController);
+router.post(
+  '/create',
+  auth(Role.USER, Role.ADMIN),
+  controller.createOrderController
+);
 
 router.post(
   '/webhook',

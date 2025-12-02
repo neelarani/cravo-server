@@ -61,3 +61,9 @@ export const deleteMenu = async (id: string) => {
   const deletedMenu = await FoodItem.findByIdAndDelete(id);
   return deletedMenu;
 };
+
+export const getCategories = async () => {
+  const categories = await FoodItem.distinct('category');
+
+  return categories;
+};
