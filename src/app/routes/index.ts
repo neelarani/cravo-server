@@ -22,6 +22,10 @@ const moduleRoutes: Array<{ path: string; route: Router }> = [
     path: '/order',
     route: modules.orderRoutes,
   },
+  {
+    path: '/payment',
+    route: modules.paymentRoutes,
+  },
 ];
 
 export default moduleRoutes.reduce(

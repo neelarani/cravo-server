@@ -1,5 +1,5 @@
 // src/schemas/user.schema.ts
-import { string, z } from 'zod';
+import { z } from 'zod';
 
 export const createUserSchema = z.object({
   email: z.string().email('Invalid email address'),

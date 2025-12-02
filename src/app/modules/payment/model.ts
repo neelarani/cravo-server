@@ -1,7 +1,21 @@
-import { Schema, model, Types } from 'mongoose';
-import { PaymentStatus } from './interface';
+// models/payment.model.ts
+import { Schema, model, Types, Document } from 'mongoose';
 
-const paymentSchema = new Schema(
+export enum PaymentStatus {
+  UNPAID = 'UNPAID',
+  PAID = 'PAID',
+}
+
+export interface IPayment extends Document {
+  user: Types.ObjectId;
+  order: Types.ObjectId;
+  amount: number;
+  status: PaymentStatus;
+  transactionId?: string; // Stripe transaction id
+  paymentGatewayData?: object; // Stripe response data
+}
+
+const paymentSchema = new Schema<IPayment>(
   {
     user: { type: Types.ObjectId, ref: 'User', required: true },
     order: { type: Types.ObjectId, ref: 'Order', required: true },
@@ -17,4 +31,4 @@ const paymentSchema = new Schema(
   { timestamps: true }
 );
 
-export const Payment = model('Payment', paymentSchema);
+export const Payment = model<IPayment>('Payment', paymentSchema);

@@ -1,28 +1,33 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model, Types, Document } from 'mongoose';
 
-const orderSchema = new Schema(
+export interface IOrder extends Document {
+  user: Types.ObjectId;
+  food: Types.ObjectId;
+  quantity: number;
+  totalPrice: number;
+  paymentMethod: 'COD' | 'ONLINE';
+  paymentStatus: 'PAID' | 'UNPAID';
+}
+
+const orderSchema = new Schema<IOrder>(
   {
     user: { type: Types.ObjectId, ref: 'User', required: true },
     food: { type: Types.ObjectId, ref: 'FoodItem', required: true },
     quantity: { type: Number, default: 1 },
     totalPrice: { type: Number, required: true },
-
-    payment: { type: Types.ObjectId, ref: 'Payment' },
-
-    // New fields for dual payment option
     paymentMethod: {
       type: String,
-      enum: ['ONLINE', 'COD'],
+      enum: ['COD', 'ONLINE'],
       default: 'COD',
       required: true,
     },
-    status: {
+    paymentStatus: {
       type: String,
-      enum: ['PENDING', 'PAID', 'COD'],
-      default: 'PENDING',
+      enum: ['PAID', 'UNPAID'],
+      default: 'UNPAID',
     },
   },
   { timestamps: true }
 );
 
-export const Order = model('Order', orderSchema);
+export const Order = model<IOrder>('Order', orderSchema);
