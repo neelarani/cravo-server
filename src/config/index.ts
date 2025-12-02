@@ -18,6 +18,7 @@ const env = cleanEnv(process.env, {
   CLOUDINARY_CLOUD_NAME: str(),
   CLOUDINARY_API_KEY: str(),
   CLOUDINARY_API_SECRET: str(),
+  SECRET_KEY: str(),
 });
 
 export default {
@@ -34,4 +35,5 @@ export default {
   cloudinary_cloud_name: env.CLOUDINARY_CLOUD_NAME,
   cloudinary_api_key: env.CLOUDINARY_API_KEY,
   cloudinary_api_secret: env.CLOUDINARY_API_SECRET,
+  secret_key: env.SECRET_KEY,
 };

@@ -1,7 +1,7 @@
 import mongoose, { Schema, type Model } from 'mongoose';
 import type { IFoodItem } from './interface';
 
-const FoodItemSchema: Schema<IFoodItem> = new Schema(
+const FoodItemSchema = new Schema(
   {
     name: { type: String, required: true },
     title: { type: String, required: true },

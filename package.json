@@ -12,6 +12,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5",
@@ -32,6 +33,9 @@
     "mongoose": "^9.0.0",
     "multer": "^2.0.2",
     "nodemailer": "^7.0.10",
+    "react-hook-form": "^7.67.0",
+    "react-hot-toast": "^2.6.0",
+    "stripe": "^20.0.0",
     "zod": "^4.1.13"
   }
 }

@@ -5,6 +5,7 @@ import { HTTP_CODE } from '@/shared/constants/httpStatusCode';
 
 export const createMenu = catchAsync(async (req, res) => {
   const menu = req.body;
+
   const createdMenu = await service.createMenu(menu, req.file);
 
   sendResponse(res, {
@@ -29,7 +30,7 @@ export const getAllMenu = catchAsync(async (req, res) => {
 
 // GET SINGLE
 export const getSingleMenu = catchAsync(async (req, res) => {
-  const { id } = req.params;
+  const id = req.params.id;
 
   const menu = await service.getSingleMenu(id!);
 

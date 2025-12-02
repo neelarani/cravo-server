@@ -12,7 +12,15 @@ const moduleRoutes: Array<{ path: string; route: Router }> = [
   },
   {
     path: '/menu',
-    route: modules.authMenu,
+    route: modules.menuRoutes,
+  },
+  {
+    path: '/gallery',
+    route: modules.galleryRoutes,
+  },
+  {
+    path: '/order',
+    route: modules.orderRoutes,
   },
 ];
 
