@@ -35,10 +35,10 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controller = __importStar(require("./controller"));
-const auth_1 = require("@/app/middlewares/auth");
+const auth_1 = require("../../../app/middlewares/auth");
 const interface_1 = require("../user/interface");
-const shared_1 = require("@/shared");
-const validateRequest_1 = require("@/app/middlewares/validateRequest");
+const shared_1 = require("../../../shared");
+const validateRequest_1 = require("../../../app/middlewares/validateRequest");
 const validation = __importStar(require("./validation"));
 const router = (0, express_1.Router)();
 router.post('/create-menu', (0, auth_1.auth)(interface_1.Role.ADMIN, interface_1.Role.SUPPER_ADMIN), shared_1.fileUploader.upload.single('file'), (0, validateRequest_1.validateRequest)(validation.foodItemSchema), controller.createMenu);

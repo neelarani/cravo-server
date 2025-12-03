@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.auth = void 0;
-const config_1 = __importDefault(require("@/config"));
-const jwtHelper_1 = require("@/shared/helpers/jwtHelper");
+const config_1 = __importDefault(require("../../config"));
+const jwtHelper_1 = require("../../shared/helpers/jwtHelper");
 const model_1 = require("../modules/user/model");
 const auth = (...roles) => {
     return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {

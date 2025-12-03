@@ -26,11 +26,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMe = exports.resetPassword = exports.forgotPassword = exports.login = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const model_1 = require("../user/model");
-const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
-const errors_1 = require("@/app/errors");
-const jwtHelper_1 = require("@/shared/helpers/jwtHelper");
-const config_1 = __importDefault(require("@/config"));
-const shared_1 = require("@/shared");
+const httpStatusCode_1 = require("../../../shared/constants/httpStatusCode");
+const errors_1 = require("../../../app/errors");
+const jwtHelper_1 = require("../../../shared/helpers/jwtHelper");
+const config_1 = __importDefault(require("../../../config"));
+const shared_1 = require("../../../shared");
 const login = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield model_1.User.findOne({
         email: payload.email,

@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateRequest = void 0;
-const catchAsync_1 = require("@/shared/utils/catchAsync");
+const catchAsync_1 = require("../../shared/utils/catchAsync");
 const validateRequest = (zs) => (0, catchAsync_1.catchAsync)((req, _, next) => __awaiter(void 0, void 0, void 0, function* () {
     req.body = yield zs.parseAsync(req.body.data ? JSON.parse(req.body.data) : req.body);
     next();

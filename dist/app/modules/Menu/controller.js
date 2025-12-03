@@ -43,10 +43,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCategoriesController = exports.deleteMenu = exports.updateMenu = exports.getSingleMenu = exports.getAllMenu = exports.createMenu = void 0;
-const catchAsync_1 = require("@/shared/utils/catchAsync");
+const catchAsync_1 = require("../../../shared/utils/catchAsync");
 const service = __importStar(require("./service"));
-const sendResponse_1 = require("@/shared/common/sendResponse");
-const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
+const sendResponse_1 = require("../../../shared/common/sendResponse");
+const httpStatusCode_1 = require("../../../shared/constants/httpStatusCode");
 exports.createMenu = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const menu = req.body;
     const createdMenu = yield service.createMenu(menu, req.file);

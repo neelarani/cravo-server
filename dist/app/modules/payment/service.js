@@ -16,8 +16,8 @@ exports.confirmOnlinePayment = exports.createOrder = void 0;
 const model_1 = require("../order/model");
 const model_2 = require("./model");
 const model_3 = require("../Menu/model");
-const config_1 = __importDefault(require("@/config"));
-const stripe_1 = require("@/shared/helpers/stripe");
+const config_1 = __importDefault(require("../../../config"));
+const stripe_1 = require("../../../shared/helpers/stripe");
 const createOrder = (userId, foodId, quantity, paymentMethod) => __awaiter(void 0, void 0, void 0, function* () {
     const food = yield model_3.FoodItem.findById(foodId);
     if (!food)

@@ -4,11 +4,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun --watch src/server.ts",
-    "build": "tsc",
+    "build": "tsc --build && tsc-alias",
     "start": "node dist/server.js"
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "tsc-alias": "^1.8.16",
     "tsx": "^4.20.6"
   },
   "peerDependencies": {

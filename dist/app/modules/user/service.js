@@ -26,8 +26,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserById = exports.getAllUser = exports.createUser = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const model_1 = require("./model");
-const errors_1 = require("@/app/errors");
-const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
+const errors_1 = require("../../../app/errors");
+const httpStatusCode_1 = require("../../../shared/constants/httpStatusCode");
 const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const existingUser = yield model_1.User.findOne({
         email: payload.email,

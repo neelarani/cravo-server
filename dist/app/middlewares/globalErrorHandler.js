@@ -25,8 +25,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.globalErrorHandler = void 0;
 const errors_1 = require("../errors");
-const shared_1 = require("@/shared");
-const config_1 = __importDefault(require("@/config"));
+const shared_1 = require("../../shared");
+const config_1 = __importDefault(require("../../config"));
 const globalErrorHandler = (err, req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     let errorSources = [];

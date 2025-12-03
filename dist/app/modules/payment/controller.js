@@ -46,12 +46,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleStripeWebhookEvent = exports.createOrderController = void 0;
-const catchAsync_1 = require("@/shared/utils/catchAsync");
-const sendResponse_1 = require("@/shared/common/sendResponse");
-const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
+const catchAsync_1 = require("../../../shared/utils/catchAsync");
+const sendResponse_1 = require("../../../shared/common/sendResponse");
+const httpStatusCode_1 = require("../../../shared/constants/httpStatusCode");
 const service = __importStar(require("./service"));
-const stripe_1 = require("@/shared/helpers/stripe");
-const config_1 = __importDefault(require("@/config"));
+const stripe_1 = require("../../../shared/helpers/stripe");
+const config_1 = __importDefault(require("../../../config"));
 exports.createOrderController = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const { foodId, quantity, paymentMethod } = req.body;

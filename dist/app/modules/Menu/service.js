@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCategories = exports.deleteMenu = exports.updateMenu = exports.getSingleMenu = exports.getAllMenu = exports.createMenu = void 0;
-const shared_1 = require("@/shared");
+const shared_1 = require("../../../shared");
 const model_1 = require("./model");
 const createMenu = (payload, file) => __awaiter(void 0, void 0, void 0, function* () {
     if (file) {

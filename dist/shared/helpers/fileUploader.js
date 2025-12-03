@@ -16,7 +16,7 @@ exports.uploadToCloudinary = exports.upload = void 0;
 const multer_1 = __importDefault(require("multer"));
 const cloudinary_1 = require("cloudinary");
 const parser_1 = __importDefault(require("datauri/parser"));
-const config_1 = __importDefault(require("@/config"));
+const config_1 = __importDefault(require("../../config"));
 cloudinary_1.v2.config({
     cloud_name: config_1.default.cloudinary_cloud_name,
     api_key: config_1.default.cloudinary_api_key,

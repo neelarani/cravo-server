@@ -43,10 +43,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMe = exports.resetPassword = exports.forgotPassword = exports.logout = exports.login = void 0;
-const catchAsync_1 = require("@/shared/utils/catchAsync");
+const catchAsync_1 = require("../../../shared/utils/catchAsync");
 const service = __importStar(require("./service"));
-const sendResponse_1 = require("@/shared/common/sendResponse");
-const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
+const sendResponse_1 = require("../../../shared/common/sendResponse");
+const httpStatusCode_1 = require("../../../shared/constants/httpStatusCode");
 exports.login = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { accessToken, refreshToken, userInfo } = yield service.login(req.body);
     res.cookie('accessToken', accessToken, {

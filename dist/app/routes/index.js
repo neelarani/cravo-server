@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const modules = __importStar(require("@/app/modules"));
+const modules = __importStar(require("../../app/modules"));
 const moduleRoutes = [
     {
         path: '/user',

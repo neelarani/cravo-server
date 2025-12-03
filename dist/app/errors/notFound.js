@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.notFound = void 0;
-const sendResponse_1 = require("@/shared/common/sendResponse");
-const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
-const catchAsync_1 = require("@/shared/utils/catchAsync");
+const sendResponse_1 = require("../../shared/common/sendResponse");
+const httpStatusCode_1 = require("../../shared/constants/httpStatusCode");
+const catchAsync_1 = require("../../shared/utils/catchAsync");
 exports.notFound = (0, catchAsync_1.catchAsync)((_, res) => __awaiter(void 0, void 0, void 0, function* () {
     (0, sendResponse_1.sendResponse)(res, {
         success: false,

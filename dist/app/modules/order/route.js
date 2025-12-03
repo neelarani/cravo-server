@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const controller = __importStar(require("./controller"));
-const auth_1 = require("@/app/middlewares/auth");
+const auth_1 = require("../../../app/middlewares/auth");
 const interface_1 = require("../user/interface");
 const express_1 = require("express");
 const router = (0, express_1.Router)();
