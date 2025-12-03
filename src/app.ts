@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 const app: Application = express();
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'https://cravo-server.vercel.app'],
+    origin: ['http://localhost:3000', 'https://cravo-client.vercel.app'],
     credentials: true,
   })
 );
