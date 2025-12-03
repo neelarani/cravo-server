@@ -32,14 +32,23 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMe = exports.resetPassword = exports.forgotPassword = exports.logout = exports.login = void 0;
 const catchAsync_1 = require("@/shared/utils/catchAsync");
 const service = __importStar(require("./service"));
 const sendResponse_1 = require("@/shared/common/sendResponse");
 const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
-exports.login = (0, catchAsync_1.catchAsync)(async (req, res) => {
-    const { accessToken, refreshToken, userInfo } = await service.login(req.body);
+exports.login = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { accessToken, refreshToken, userInfo } = yield service.login(req.body);
     res.cookie('accessToken', accessToken, {
         secure: true,
         httpOnly: true,
@@ -62,8 +71,8 @@ exports.login = (0, catchAsync_1.catchAsync)(async (req, res) => {
             user: userInfo,
         },
     });
-});
-exports.logout = (0, catchAsync_1.catchAsync)(async (req, res) => {
+}));
+exports.logout = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.clearCookie('accessToken', {
         httpOnly: true,
         secure: true,
@@ -82,22 +91,28 @@ exports.logout = (0, catchAsync_1.catchAsync)(async (req, res) => {
         message: 'Logged Out',
         data: null,
     });
-});
-exports.forgotPassword = (0, catchAsync_1.catchAsync)(async (req, res) => (0, sendResponse_1.sendResponse)(res, {
-    status: httpStatusCode_1.HTTP_CODE.OK,
-    success: true,
-    message: 'Check your email!',
-    data: await service.forgotPassword(req.body),
 }));
-exports.resetPassword = (0, catchAsync_1.catchAsync)(async (req, res) => (0, sendResponse_1.sendResponse)(res, {
-    status: httpStatusCode_1.HTTP_CODE.OK,
-    success: true,
-    message: 'Password Reset!',
-    data: await service.resetPassword(req.query.token, req.body.password),
+exports.forgotPassword = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    return (0, sendResponse_1.sendResponse)(res, {
+        status: httpStatusCode_1.HTTP_CODE.OK,
+        success: true,
+        message: 'Check your email!',
+        data: yield service.forgotPassword(req.body),
+    });
 }));
-exports.getMe = (0, catchAsync_1.catchAsync)(async (req, res) => (0, sendResponse_1.sendResponse)(res, {
-    status: httpStatusCode_1.HTTP_CODE.OK,
-    success: true,
-    message: 'User retrieve successfully!',
-    data: await service.getMe(req.cookies),
+exports.resetPassword = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    return (0, sendResponse_1.sendResponse)(res, {
+        status: httpStatusCode_1.HTTP_CODE.OK,
+        success: true,
+        message: 'Password Reset!',
+        data: yield service.resetPassword(req.query.token, req.body.password),
+    });
+}));
+exports.getMe = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    return (0, sendResponse_1.sendResponse)(res, {
+        status: httpStatusCode_1.HTTP_CODE.OK,
+        success: true,
+        message: 'User retrieve successfully!',
+        data: yield service.getMe(req.cookies),
+    });
 }));

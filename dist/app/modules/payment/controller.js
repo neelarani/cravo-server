@@ -32,6 +32,15 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -43,16 +52,17 @@ const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
 const service = __importStar(require("./service"));
 const stripe_1 = require("@/shared/helpers/stripe");
 const config_1 = __importDefault(require("@/config"));
-exports.createOrderController = (0, catchAsync_1.catchAsync)(async (req, res) => {
+exports.createOrderController = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
     const { foodId, quantity, paymentMethod } = req.body;
-    const userId = req.user?._id || req.user?.id;
+    const userId = ((_a = req.user) === null || _a === void 0 ? void 0 : _a._id) || ((_b = req.user) === null || _b === void 0 ? void 0 : _b.id);
     if (!foodId || !quantity || !paymentMethod)
         return (0, sendResponse_1.sendResponse)(res, {
             success: false,
             status: httpStatusCode_1.HTTP_CODE.BAD_REQUEST,
             message: 'All fields are required',
         });
-    const result = await service.createOrder(userId, foodId, Number(quantity), paymentMethod.toUpperCase());
+    const result = yield service.createOrder(userId, foodId, Number(quantity), paymentMethod.toUpperCase());
     if (paymentMethod.toUpperCase() === 'COD') {
         return (0, sendResponse_1.sendResponse)(res, {
             success: true,
@@ -71,9 +81,10 @@ exports.createOrderController = (0, catchAsync_1.catchAsync)(async (req, res) =>
             checkoutUrl: result.checkoutUrl,
         },
     });
-});
+}));
 // Stripe webhook
-exports.handleStripeWebhookEvent = (0, catchAsync_1.catchAsync)(async (req, res) => {
+exports.handleStripeWebhookEvent = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const sig = req.headers['stripe-signature'];
     let event;
     try {
@@ -86,11 +97,11 @@ exports.handleStripeWebhookEvent = (0, catchAsync_1.catchAsync)(async (req, res)
     // cast to Checkout.Session
     if (event.type === 'checkout.session.completed') {
         const session = event.data.object;
-        const paymentId = session.metadata?.paymentId;
+        const paymentId = (_a = session.metadata) === null || _a === void 0 ? void 0 : _a.paymentId;
         if (!paymentId) {
             return res.status(400).send('Payment ID not found in metadata');
         }
-        const result = await service.confirmOnlinePayment(paymentId, session);
+        const result = yield service.confirmOnlinePayment(paymentId, session);
         return (0, sendResponse_1.sendResponse)(res, {
             status: 200,
             success: true,
@@ -98,4 +109,4 @@ exports.handleStripeWebhookEvent = (0, catchAsync_1.catchAsync)(async (req, res)
             data: result,
         });
     }
-});
+}));

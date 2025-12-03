@@ -32,37 +32,46 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserById = exports.getAllUser = exports.createUser = void 0;
 const sendResponse_1 = require("@/shared/common/sendResponse");
 const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
 const catchAsync_1 = require("@/shared/utils/catchAsync");
 const service = __importStar(require("./service"));
-exports.createUser = (0, catchAsync_1.catchAsync)(async (req, res) => {
+exports.createUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userInfo = req.body;
-    const createdUser = await service.createUser(userInfo);
+    const createdUser = yield service.createUser(userInfo);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         status: httpStatusCode_1.HTTP_CODE.CREATED,
         message: `User Created Successfully!`,
         data: createdUser,
     });
-});
-exports.getAllUser = (0, catchAsync_1.catchAsync)(async (req, res) => {
+}));
+exports.getAllUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         status: httpStatusCode_1.HTTP_CODE.OK,
         message: `User Retrieve Successfully!`,
-        data: await service.getAllUser(),
+        data: yield service.getAllUser(),
     });
-});
-exports.getUserById = (0, catchAsync_1.catchAsync)(async (req, res) => {
+}));
+exports.getUserById = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.params.id;
-    const result = await service.getUserById(userId);
+    const result = yield service.getUserById(userId);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         status: httpStatusCode_1.HTTP_CODE.OK,
         message: `User Retrieve Successfully!`,
         data: result,
     });
-});
+}));

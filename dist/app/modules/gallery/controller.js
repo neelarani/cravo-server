@@ -32,29 +32,38 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllGallery = exports.createGallery = void 0;
 const sendResponse_1 = require("@/shared/common/sendResponse");
 const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
 const catchAsync_1 = require("@/shared/utils/catchAsync");
 const service = __importStar(require("./service"));
-exports.createGallery = (0, catchAsync_1.catchAsync)(async (req, res) => {
+exports.createGallery = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const gallery = req.body;
-    const createdGallery = await service.createGallery(gallery, req.file);
+    const createdGallery = yield service.createGallery(gallery, req.file);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         status: httpStatusCode_1.HTTP_CODE.CREATED,
         message: `Gallery Created Successfully!`,
         data: createdGallery,
     });
-});
+}));
 // GET ALL
-exports.getAllGallery = (0, catchAsync_1.catchAsync)(async (req, res) => {
-    const gallery = await service.getAllGallery();
+exports.getAllGallery = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const gallery = yield service.getAllGallery();
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         status: httpStatusCode_1.HTTP_CODE.OK,
         message: `Gallery fetched successfully!`,
         data: gallery,
     });
-});
+}));

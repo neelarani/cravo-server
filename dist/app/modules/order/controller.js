@@ -32,15 +32,25 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createOrderController = void 0;
 const service = __importStar(require("./service"));
 const sendResponse_1 = require("@/shared/common/sendResponse");
 const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
 const catchAsync_1 = require("@/shared/utils/catchAsync");
-exports.createOrderController = (0, catchAsync_1.catchAsync)(async (req, res) => {
+exports.createOrderController = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const { foodId, quantity, paymentMethod } = req.body;
-    const userId = req.user?._id; // auth middleware থেকে আসবে
+    const userId = (_a = req.user) === null || _a === void 0 ? void 0 : _a._id; // auth middleware থেকে আসবে
     if (!foodId || !quantity || !paymentMethod) {
         return (0, sendResponse_1.sendResponse)(res, {
             success: false,
@@ -48,11 +58,11 @@ exports.createOrderController = (0, catchAsync_1.catchAsync)(async (req, res) =>
             message: 'All fields are required',
         });
     }
-    const order = await service.createOrder(userId, foodId, Number(quantity), paymentMethod.toUpperCase());
+    const order = yield service.createOrder(userId, foodId, Number(quantity), paymentMethod.toUpperCase());
     return (0, sendResponse_1.sendResponse)(res, {
         success: true,
         status: httpStatusCode_1.HTTP_CODE.CREATED,
         message: 'Order created successfully',
         data: order,
     });
-});
+}));
