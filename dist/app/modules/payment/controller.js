@@ -1,0 +1,101 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.handleStripeWebhookEvent = exports.createOrderController = void 0;
+const catchAsync_1 = require("@/shared/utils/catchAsync");
+const sendResponse_1 = require("@/shared/common/sendResponse");
+const httpStatusCode_1 = require("@/shared/constants/httpStatusCode");
+const service = __importStar(require("./service"));
+const stripe_1 = require("@/shared/helpers/stripe");
+const config_1 = __importDefault(require("@/config"));
+exports.createOrderController = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const { foodId, quantity, paymentMethod } = req.body;
+    const userId = req.user?._id || req.user?.id;
+    if (!foodId || !quantity || !paymentMethod)
+        return (0, sendResponse_1.sendResponse)(res, {
+            success: false,
+            status: httpStatusCode_1.HTTP_CODE.BAD_REQUEST,
+            message: 'All fields are required',
+        });
+    const result = await service.createOrder(userId, foodId, Number(quantity), paymentMethod.toUpperCase());
+    if (paymentMethod.toUpperCase() === 'COD') {
+        return (0, sendResponse_1.sendResponse)(res, {
+            success: true,
+            status: httpStatusCode_1.HTTP_CODE.CREATED,
+            message: 'Order placed successfully (COD)',
+            data: { order: result.order },
+        });
+    }
+    return (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        status: httpStatusCode_1.HTTP_CODE.CREATED,
+        message: 'Order created, proceed to payment',
+        data: {
+            order: result.order,
+            payment: result.payment,
+            checkoutUrl: result.checkoutUrl,
+        },
+    });
+});
+// Stripe webhook
+exports.handleStripeWebhookEvent = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+    try {
+        event = stripe_1.stripe.webhooks.constructEvent(req.body, sig, config_1.default.stripe_webhook_secret_key);
+    }
+    catch (err) {
+        console.error('Webhook signature verification failed:', err.message);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+    // cast to Checkout.Session
+    if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+        const paymentId = session.metadata?.paymentId;
+        if (!paymentId) {
+            return res.status(400).send('Payment ID not found in metadata');
+        }
+        const result = await service.confirmOnlinePayment(paymentId, session);
+        return (0, sendResponse_1.sendResponse)(res, {
+            status: 200,
+            success: true,
+            message: 'Webhook processed successfully',
+            data: result,
+        });
+    }
+});
