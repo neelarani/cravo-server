@@ -23,3 +23,8 @@ export const createOrder = async (
 
   return orders;
 };
+
+export const allOrder = async () => {
+  const order = await Order.find();
+  return order;
+};

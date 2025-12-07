@@ -32,3 +32,13 @@ export const createOrderController = catchAsync(
     });
   }
 );
+
+export const allOrder = catchAsync(async (req, res) => {
+  const result = await service.allOrder();
+  return sendResponse(res, {
+    success: true,
+    status: HTTP_CODE.CREATED,
+    message: 'Order Retrieve successfully',
+    data: result,
+  });
+});
