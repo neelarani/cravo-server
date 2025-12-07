@@ -42,7 +42,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createOrderController = void 0;
+exports.allOrder = exports.createOrderController = void 0;
 const service = __importStar(require("./service"));
 const sendResponse_1 = require("../../../shared/common/sendResponse");
 const httpStatusCode_1 = require("../../../shared/constants/httpStatusCode");
@@ -64,5 +64,14 @@ exports.createOrderController = (0, catchAsync_1.catchAsync)((req, res) => __awa
         status: httpStatusCode_1.HTTP_CODE.CREATED,
         message: 'Order created successfully',
         data: order,
+    });
+}));
+exports.allOrder = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield service.allOrder();
+    return (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        status: httpStatusCode_1.HTTP_CODE.CREATED,
+        message: 'Order Retrieve successfully',
+        data: result,
     });
 }));

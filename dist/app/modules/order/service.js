@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createOrder = void 0;
+exports.allOrder = exports.createOrder = void 0;
 const model_1 = require("../order/model");
 const model_2 = require("../Menu/model");
 const createOrder = (userId, foodId, quantity, paymentMethod) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,3 +28,8 @@ const createOrder = (userId, foodId, quantity, paymentMethod) => __awaiter(void 
     return orders;
 });
 exports.createOrder = createOrder;
+const allOrder = () => __awaiter(void 0, void 0, void 0, function* () {
+    const order = yield model_1.Order.find();
+    return order;
+});
+exports.allOrder = allOrder;

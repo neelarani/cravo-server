@@ -39,4 +39,5 @@ const interface_1 = require("../user/interface");
 const express_1 = require("express");
 const router = (0, express_1.Router)();
 router.post('/create', (0, auth_1.auth)(interface_1.Role.USER), controller.createOrderController);
+router.get('/all-order', (0, auth_1.auth)(interface_1.Role.USER, interface_1.Role.ADMIN), controller.allOrder);
 exports.default = router;
