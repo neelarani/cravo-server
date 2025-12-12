@@ -29,7 +29,7 @@ const emailSender = (email, html) => __awaiter(void 0, void 0, void 0, function*
         },
     });
     const info = yield transporter.sendMail({
-        from: `"Deepah Voice" <${config_1.default.email}>`,
+        from: `"cravo" <${config_1.default.email}>`,
         to: email,
         subject: 'Reset Password Link',
         html,
