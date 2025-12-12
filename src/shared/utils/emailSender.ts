@@ -16,7 +16,7 @@ export const emailSender = async (email: string, html: string) => {
   });
 
   const info = await transporter.sendMail({
-    from: `"Deepah Voice" <${config.email}>`,
+    from: `"cravo" <${config.email}>`,
     to: email,
     subject: 'Reset Password Link',
     html,
